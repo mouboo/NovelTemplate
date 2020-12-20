@@ -1,12 +1,42 @@
+%Temporary packages
 \usepackage{lipsum}
-\usepackage{microtype}
 \usepackage{blindtext}
 
-%
-% FONTS
-% 
-\usepackage{ETbb}
-\usepackage[T1]{fontenc}
+%%
+%% FONTS
+%% using fontspec
+%%
+\usepackage{microtype}
+\usepackage[]{fontspec}
+
+\setmainfont{etbb}[% in local font directory
+	Path= ./fonts/ETbb/ ,
+	UprightFont		= *-Regular.otf ,
+	BoldFont		= *-Bold.otf ,
+	ItalicFont      = *-Italic.otf ,
+	BoldItalicFont  = *-BoldItalic.otf ,
+]
+
+\setsansfont{NunitoSans}[% system font
+	Path= ./fonts/nunitosans/ ,
+	UprightFont		= *-Regular.ttf ,
+	BoldFont		= *-Bold.ttf ,
+	ItalicFont      = *-Italic.ttf ,
+	BoldItalicFont  = *-BoldItalic.ttf ,
+]
+
+\setmonofont{Heuristica}[% latex package
+	Path= ./fonts/heuristica/ ,
+	UprightFont		= *-Regular.otf ,
+	BoldFont		= *-Bold.otf ,
+	ItalicFont      = *-Italic.otf ,
+	BoldItalicFont  = *-BoldItalic.otf ,
+]
+
+\newfontfamily\myfont{italianno}[% Use with {\myfont <text>}
+	Path            =   ./fonts/italianno/,
+	UprightFont     =   *-Regular,
+] 
 
 %
 % PAPERSIZE AND MARGINS
@@ -20,39 +50,62 @@
 \setulmarginsandblock{0.75in}{*}{1.5} 
 \checkandfixthelayout
 
-%
-% PAGE STYLE
-%
-%
-% Custom page style called "mypagestyle"
-%
-\makepagestyle{mypagestyle} % Create a new pagestyle
+
+%%
+%% PAGE STYLE
+%%
+
+\makepagestyle{mypagestyle}
+\makeheadrule{companion}{\textwidth}{\normalrulethickness}
+
 \makepsmarks{mypagestyle}{%
-	% This is where we specify what \leftmark and \rightmark contains
-	\createmark{chapter}{right}{nonumber}{}{\quad}
-	%createmark{chapter}{left}{nonumber}{}{\quad} % the left side has the same text always (title), so we don't need this	
-	
-	% Might want to keep these, see the manual for further information.
+	\nouppercaseheads
+	\createmark{chapter}{both}{nonumber}{}{}
+	\createmark{section}{right}{shownumber}{}{. \space}
 	\createplainmark{toc}{both}{\contentsname}
 	\createplainmark{lof}{both}{\listfigurename}
 	\createplainmark{lot}{both}{\listtablename}
 	\createplainmark{bib}{both}{\bibname}
 	\createplainmark{index}{both}{\indexname}
-	\createplainmark{glossary}{both}{\glossaryname}}
+	\createplainmark{glossary}{both}{\glossaryname}
+	
+	\makeevenhead{mypagestyle}%
+		{\normalfont\bfseries\thepage}{}{\normalfont\bfseries\leftmark}
+	\makeoddhead{mypagestyle}%
+		{\normalfont\bfseries\rightmark}{}{\normalfont\bfseries\thepage}
+	\makeevenfoot{mypagestyle}%
+		{}{}{}
+	\makeoddfoot{mypagestyle}%
+		{}{}{}
+}
+\pagestyle{mypagestyle}		
 
-% Here's where you style the header
-\makeevenhead{mypagestyle}% Even page = left page
-{\normalfont\thepage\quad\sffamily\bfseries\MakeUppercase\thetitle}{}{}
-\makeoddhead{mypagestyle}% Odd page = right page
-{}{}{\normalfont\sffamily\bfseries\rightmark\quad\normalfont\thepage}
+%\makepagestyle{mypagestyle}
+%\makepsmarks{mypagestyle}{%
+%	\createmark{chapter}{right}{nonumber}{}{\quad}
+%	\createmark{chapter}{left}{nonumber}{}{\quad} % the left side has the same text always (title), so we don't need this	
+%	
+%	% Might want to keep these, see the manual for further information.
+%	\createplainmark{toc}{both}{\contentsname}
+%	\createplainmark{lof}{both}{\listfigurename}
+%	\createplainmark{lot}{both}{\listtablename}
+%	\createplainmark{bib}{both}{\bibname}
+%	\createplainmark{index}{both}{\indexname}
+%	\createplainmark{glossary}{both}{\glossaryname}}
+%
+%% Here's where you style the header
+%\makeevenhead{mypagestyle}% Even page = left page
+%{\normalfont\thepage\quad\sffamily\bfseries\MakeUppercase\thetitle}{}{}
+%\makeoddhead{mypagestyle}% Odd page = right page
+%{}{}{\normalfont\sffamily\bfseries\rightmark\quad\normalfont\thepage}
 
-% Activate the new pagestyle
-\pagestyle{mypagestyle}
+%\pagestyle{mypagestyle}
 
 
 %%
 %% CHAPTER STYLE
 %%
+
 %\makechapterstyle{mychapterstyle}{% Default values:
 %  \setlength{\beforechapskip}{50pt}
 %  \renewcommand*{\chapterheadstart}{\vspace*{\beforechapskip}}
@@ -120,6 +173,12 @@
 %\newcommand{\mylettr}[1]{#1} % Turn off lettrine
 \newcommand{\mylettr}[1]{\lettrine[lines=2]{#1}} % lettrine without initial letter
 
+%%
+%% CUSTOM COMMANDS
+%%
+
+%% Asterism
+% <code for asterism>
 
 %% 
 %% see page  of the memoir manual
