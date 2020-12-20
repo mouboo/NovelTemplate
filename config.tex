@@ -1,15 +1,13 @@
 \usepackage{lipsum}
 \usepackage{microtype}
+\usepackage{blindtext}
 
 %
 % FONTS
 % 
-%\usepackage{tgschola}
-
+\usepackage{ETbb}
 \usepackage[T1]{fontenc}
 
-\usepackage{lettrine}
-\usepackage{Zallman}
 %
 % PAPERSIZE AND MARGINS
 % see page 1 of the memoir manual
@@ -23,9 +21,97 @@
 \checkandfixthelayout
 
 %
-% LETTRINE CONFIG
+% PAGE STYLE
 %
-% https://ftp.acc.umu.se/mirror/CTAN/macros/latex/contrib/lettrine/doc/lettrine.pdf
+%
+% Custom page style called "mypagestyle"
+%
+\makepagestyle{mypagestyle} % Create a new pagestyle
+\makepsmarks{mypagestyle}{%
+	% This is where we specify what \leftmark and \rightmark contains
+	\createmark{chapter}{right}{nonumber}{}{\quad}
+	%createmark{chapter}{left}{nonumber}{}{\quad} % the left side has the same text always (title), so we don't need this	
+	
+	% Might want to keep these, see the manual for further information.
+	\createplainmark{toc}{both}{\contentsname}
+	\createplainmark{lof}{both}{\listfigurename}
+	\createplainmark{lot}{both}{\listtablename}
+	\createplainmark{bib}{both}{\bibname}
+	\createplainmark{index}{both}{\indexname}
+	\createplainmark{glossary}{both}{\glossaryname}}
+
+% Here's where you style the header
+\makeevenhead{mypagestyle}% Even page = left page
+{\normalfont\thepage\quad\sffamily\bfseries\MakeUppercase\thetitle}{}{}
+\makeoddhead{mypagestyle}% Odd page = right page
+{}{}{\normalfont\sffamily\bfseries\rightmark\quad\normalfont\thepage}
+
+% Activate the new pagestyle
+\pagestyle{mypagestyle}
+
+
+%%
+%% CHAPTER STYLE
+%%
+%\makechapterstyle{mychapterstyle}{% Default values:
+%  \setlength{\beforechapskip}{50pt}
+%  \renewcommand*{\chapterheadstart}{\vspace*{\beforechapskip}}
+%  \renewcommand*{\chapnamefont}{\normalfont\huge\bfseries}
+%  \renewcommand*{\printchaptername}{\chapnamefont \@chapapp}
+%  \renewcommand*{\chapternamenum}{\space}
+%  \renewcommand*{\chapnumfont}{\normalfont\huge\bfseries}
+%  \renewcommand*{\printchapternum}{\chapnumfont \thechapter}
+%  \setlength{\midchapskip}{20pt}
+%  \renewcommand*{\afterchapternum}{\par\nobreak\vskip \midchapskip}
+%  \renewcommand*{\printchapternonum}{}
+%  \renewcommand*{\chaptitlefont}{\normalfont\Huge\bfseries}
+%  \renewcommand*{\printchaptertitle##1}{\chaptitlefont ##1}
+%  \setlength{\afterchapskip}{40pt}
+%  \renewcommand*{\afterchaptertitle}{\par\nobreak\vskip \afterchapskip}
+%}
+%\chapterstyle{mychapterstyle}
+
+
+%%
+%% LOWER SECTIONS STYLE
+%%
+
+%% Section
+%\setbeforesecskip{-3.5ex plus -1ex minus -.2ex} %If the values are negative then the first line after the heading will not be indented.
+%\setsecindent{0em}
+%\setsecheadstyle{\Large\bfseries}
+%\setaftersecskip{2.3ex plus .2ex} %If the value is negative, then the heading will be run-in
+
+%% Subsection
+%\setbeforesubsecskip{-3.25ex plus -1ex minus -.2ex} %If the values are negative then the first line after the heading will not be indented.
+%\setsubsecindent{0em}
+%\setsubsecheadstyle{\large\bfseries}
+%\setaftersubsecskip{1.5ex plus .2ex} %If the value is negative, then the heading will be run-in
+
+%% Subsubsection
+%\setbeforesubsubsecskip{-3.25ex plus -1ex minus -.2ex} %If the values are negative then the first line after the heading will not be indented.
+%\setsubsubsecindent{0em}
+%\setsubsubsecheadstyle{\bfseries}
+%\setaftersubsubsecskip{1.5ex plus .2ex} %If the value is negative, then the heading will be run-in
+
+%% Paragraph
+%\setbeforeparaskip{3.25ex plus 1ex minus .2ex}
+%\setparaindent{0em}
+%\setparaheadstyle{\bfseries}
+%\setafterparaskip{-1em} %If the value is negative, then the heading will be run-in
+
+%% Subparagraph
+%\setbeforesubparaskip{3.25ex plus 1ex minus .2ex}
+%\setsubparaindent{\parindent}
+%\setsubparaheadstyle{\bfseries}
+%\setaftersubparaskip{-1em} %If the value is negative, then the heading will be run-in
+
+%%
+%% LETTRINE CONFIG
+%%
+
+\usepackage{lettrine}
+\usepackage{Zallman} %https://ftp.acc.umu.se/mirror/CTAN/macros/latex/contrib/lettrine/doc/lettrine.pdf
 % https://ftp.acc.umu.se/mirror/CTAN/macros/latex/contrib/cfr-initials/cfr-initials.pdf
 %
 \renewcommand{\LettrineTextFont}{\rmfamily}
@@ -34,17 +120,17 @@
 %\newcommand{\mylettr}[1]{#1} % Turn off lettrine
 \newcommand{\mylettr}[1]{\lettrine[lines=2]{#1}} % lettrine without initial letter
 
-%
-% 
-% see page  of the memoir manual
-%
 
-%
-% 
-% see page  of the memoir manual
-%
+%% 
+%% see page  of the memoir manual
+%%
 
-%
-% 
-% see page  of the memoir manual
-%
+
+%% 
+%% see page  of the memoir manual
+%%
+
+
+%% 
+%% see page  of the memoir manual
+%%
